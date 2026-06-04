@@ -8,7 +8,6 @@ export default function EditExperience() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // Redux से सभी अनुभव का डेटा लें ताकि सही ID वाला आइटम ढूँढ सकें
   const { data: allExperience, loading } = useSelector((state) => state.adminExperience);
   
   const [formData, setFormData] = useState({
@@ -16,7 +15,6 @@ export default function EditExperience() {
     type: 'Job', responsibilities: '', is_currently_working: false
   });
 
-  // डेटा मिलने पर फॉर्म भरें
   useEffect(() => {
     const item = allExperience.find(exp => exp.id === parseInt(id));
     if (item) {
@@ -37,7 +35,6 @@ export default function EditExperience() {
       responsibilities: formData.responsibilities
     };
 
-    // Saga को ID और Payload भेजें
     dispatch(adminUpdateExperienceRequest({ id, payload: updatePayload }));
     navigate('/admin/experience');
   };

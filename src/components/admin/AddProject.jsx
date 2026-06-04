@@ -22,7 +22,6 @@ const handleReset = () => {
   const handleBack = () => {
     navigate('/admin/projects');
   };
-  // Validation Schema
   const validationSchema = Yup.object({
     title: Yup.string().required('Project Title is required'),
     description: Yup.string().required('Description is required'),
@@ -127,7 +126,6 @@ const handleReset = () => {
 
         {/* Submit Button */}
        <div className="flex gap-4 mt-6">
-  {/* Submit Button */}
   <button 
     type="submit" 
     disabled={uploading || !formik.isValid} 
@@ -136,7 +134,6 @@ const handleReset = () => {
     {uploading ? 'UPLOADING...' : (id ? 'UPDATE PROJECT' : 'SAVE PROJECT')}
   </button>
 
-  {/* Reset Button (Better UI) */}
   <button 
     type="button" 
     onClick={handleReset} 

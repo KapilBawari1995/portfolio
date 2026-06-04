@@ -18,7 +18,7 @@ export default function MainLayout() {
     <div className="min-h-screen bg-[#282c33] text-white font-mono selection:bg-[#c778dd] selection:text-black overflow-x-hidden">
       <Navbar />
       <SideSocials profileData={profileData} />
-      <main className="max-w-6xl mx-auto px-8 pt-12 pb-24 relative">
+      <main className="max-w-6xl mx-auto px-0 md:px-5 pt-0 md:pt-2 pb-0 relative">
         <Outlet />
       </main>
       <Footer profileData={profileData} />

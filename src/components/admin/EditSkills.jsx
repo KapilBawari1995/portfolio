@@ -7,19 +7,18 @@ export default function EditSkills() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // Redux से data और loading status लें
+ 
   const { data, loading } = useSelector((state) => state.skills);
   
   const [skills, setSkills] = useState({ 
     languages: '', databases: '', tools: '', frameworks: '', other: '' 
   });
 
-  // जब Redux से डेटा आ जाए, तो फॉर्म में सेट करें
   useEffect(() => {
     if (data) setSkills(data);
   }, [data]);
 
-  // जब सेविंग पूरी हो जाए और loading false हो जाए, तब navigate करें
+ 
   const [isSaving, setIsSaving] = useState(false);
   useEffect(() => {
     if (isSaving && !loading) {

@@ -7,11 +7,11 @@ export default function ExperienceManager() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // Redux स्टेट से डेटा और लोडिंग स्टेटस लेना
+
   const { data, loading, error } = useSelector((state) => state.adminExperience);
 
   useEffect(() => {
-    // कॉम्पोनेंट लोड होते ही Saga के ज़रिए डेटा फेच करना
+
     dispatch(adminFetchExperienceRequest());
   }, [dispatch]);
 

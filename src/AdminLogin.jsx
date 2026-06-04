@@ -12,14 +12,12 @@ export default function AdminLogin() {
   
   const { loading, error, user } = useSelector((state) => state.adminlogin);
 
-  // 1. अगर Redux state में user आ गया है, तो डैशबोर्ड पर भेजें
   useEffect(() => {
     if (user) {
       navigate('/admin/dashboard', { replace: true });
     }
   }, [user, navigate]);
 
-  // 2. सुरक्षा: अगर यूजर पेज रिफ्रेश करता है, तो Supabase से सेशन चेक करें
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();

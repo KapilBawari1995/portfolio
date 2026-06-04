@@ -30,7 +30,6 @@ export default function DashboardView() {
   );
 }
 
-// Helper Component for cleaner code
 const StatCard = ({ title, count }) => (
   <div className="bg-[#282c33] p-6 rounded-xl border border-gray-700">
     <h3 className="text-gray-400 text-sm uppercase">{title}</h3>

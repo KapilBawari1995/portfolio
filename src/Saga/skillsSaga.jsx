@@ -4,7 +4,7 @@ import { fetchSkillsSuccess, fetchSkillsFailure } from '../Slice/skillsSlice';
 
 function* fetchSkillsSaga() {
   try {
-    // यहाँ अपनी table name और columns सही रखें
+   
     const { data, error } = yield call(() => 
       supabase.from('profile').select('skills_languages, skills_databases, skills_tools, skills_other, skills_frameworks').single()
     );

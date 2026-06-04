@@ -5,7 +5,6 @@ const toastConfig = {
     autoClose: 3000,
 };
 
-// "export const" use karein
 export const showResponseToast = (status, message = "Operation Completed", type = "success") => {
     if (type === 'success') {
         toast.success(`✅ (${status}) ${message}`, toastConfig);

@@ -9,8 +9,7 @@ import ContactSection from './components/public/ContactSection';
 import BlogSection from './components/public/BlogSection';
 
 export default function PortfolioHero() {
-  // अब कोई डेटा फेचिंग यहाँ नहीं होगी, 
-  // सब कुछ संबंधित कंपोनेंट्स के अंदर Redux के जरिए हो रहा है।
+  
 
   return (
     <div className="min-h-screen bg-[#282c33] text-white font-mono selection:bg-[#c778dd] selection:text-black overflow-x-hidden">

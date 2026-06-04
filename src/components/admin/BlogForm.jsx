@@ -4,7 +4,7 @@ import { supabase } from '../../supabaseClient';
 
 export default function BlogForm() {
   const navigate = useNavigate();
-  const { id } = useParams(); // URL se ID lene ke liye
+  const { id } = useParams(); 
   
   const initialData = { 
     title: '', content: '', category: '', author_name: '', image_url: '' 
@@ -59,7 +59,6 @@ export default function BlogForm() {
     let finalUrl = data.image_url;
 
     try {
-      // Image Upload
       if (imageFile) {
         const fileName = `${Date.now()}_${imageFile.name}`;
         const { error: uploadError } = await supabase.storage
@@ -74,9 +73,7 @@ export default function BlogForm() {
         finalUrl = publicUrl;
       }
 
-      // Add ya Update Logic
       if (id) {
-        // UPDATE
         const { error } = await supabase.from('blogs').update({ 
           title: data.title,
           content: data.content,
@@ -87,7 +84,7 @@ export default function BlogForm() {
         if (error) throw error;
         alert("Blog Updated Successfully!");
       } else {
-        // INSERT
+    
         const { error } = await supabase.from('blogs').insert([{ 
           title: data.title,
           content: data.content,

@@ -17,5 +17,5 @@ function* handleLoginSaga(action) {
 }
 
 export default function* watchAuth() {
-  yield takeLatest('auth/loginRequest', handleLoginSaga);
+  yield takeLatest('adminlogin/loginRequest', handleLoginSaga);
 }

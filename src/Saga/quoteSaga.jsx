@@ -4,7 +4,7 @@ import { fetchQuoteSuccess, fetchQuoteFailure } from '../Slice/quoteSlice';
 
 function* fetchQuoteSaga() {
   try {
-    // मान लीजिए 'profile' टेबल में ही quote है
+
     const { data, error } = yield call(() => supabase.from('profile').select('quote_text, quote_author').single());
     if (error) throw error;
     yield put(fetchQuoteSuccess(data));

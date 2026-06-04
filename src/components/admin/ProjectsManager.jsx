@@ -48,7 +48,7 @@ export default function ProjectsManager() {
                 <th className="px-6 py-6 text-center">Actions</th>
               </tr>
             </thead>
-            
+
             {projects.length > 0 ? (
               <tbody className="divide-y divide-gray-700">
                 {projects.map((p) => (
@@ -82,12 +82,12 @@ export default function ProjectsManager() {
                     <div className="premium-empty-box flex flex-col items-center justify-center text-center p-8 rounded-3xl w-full max-w-lg mx-auto">
                       <div className=" flex items-center justify-center  "><span className="text-4xl">
 
-<img 
-    src={datanotfound} 
-    alt="No Data" 
-    className="w-24 h-24 mb-6 opacity-80" 
-  />                        </span>
-                        </div>
+                        <img
+                          src={datanotfound}
+                          alt="No Data"
+                          className="w-24 h-24 mb-6 opacity-80"
+                        />                        </span>
+                      </div>
                       <h3 className="text-xl font-bold text-white mb-2">Project Not Found</h3>
                     </div>
                   </td>

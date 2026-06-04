@@ -12,7 +12,6 @@ const adminExperienceSlice = createSlice({
 adminUpdateExperienceRequest: (state) => { state.loading = true; },
 adminUpdateExperienceSuccess: (state, action) => { 
   state.loading = false;
-  // स्टेट में अपडेटेड आइटम को रिप्लेस करें
   state.data = state.data.map(item => 
     item.id === action.payload.id ? action.payload : item
   );

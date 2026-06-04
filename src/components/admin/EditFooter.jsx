@@ -9,7 +9,7 @@ export default function EditFooter() {
   });
   const [loading, setLoading] = useState(false);
 
-  // Labels ताकि एडिट पेज पर नाम साफ़ दिखें
+
   const fieldLabels = {
     copyright_name: "Copyright Name",
     github_url: "GitHub URL",
@@ -32,7 +32,7 @@ export default function EditFooter() {
     if (error) {
       alert("Error: " + error.message);
     } else {
-      navigate('/admin/footer'); // सेव होने के बाद वापस व्यू पेज पर
+      navigate('/admin/footer'); 
     }
     setLoading(false);
   }

@@ -12,7 +12,7 @@ import AdminPanel from './AdminPanel';
 import PortfolioHero from './PortfolioHero';
 import AllBlogsPage from './AllBlogsPage';
 import SingleBlogPage from './SingleBlogPage';
-import PublicNotFound from './components/PublicNotFound'; // 404 for Public
+import PublicNotFound from './components/PublicNotFound'; 
 
 // Admin Pages
 import AdminLogin from './AdminLogin';
@@ -44,23 +44,21 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           
-          {/* --- PUBLIC ROUTING --- */}
-          {/* अगर एडमिन लॉगिन है, तो ये पेज नहीं देख पाएगा */}
+      
           <Route element={<PublicOnlyRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/" element={<PortfolioHero />} />
               <Route path="/all-blogs" element={<AllBlogsPage />} />
               <Route path="/blog/:id" element={<SingleBlogPage />} />
             </Route>
-            {/* पब्लिक एरिया में गलत पाथ के लिए Public 404 */}
+            
             <Route path="*" element={<PublicNotFound />} />
           </Route>
 
-          {/* --- AUTHENTICATION --- */}
+  
           <Route path="/login" element={<AdminLogin />} />
 
-          {/* --- ADMIN ROUTING --- */}
-          {/* बिना लॉगिन के अंदर कोई नहीं आ सकता */}
+        
           <Route element={<ProtectedRoute />}>
             <Route path="/admin" element={<AdminPanel />}>
               <Route index element={<DashboardView />} />
@@ -91,7 +89,6 @@ export default function App() {
               <Route path="footer" element={<FooterManager />} />
               <Route path="edit-footer" element={<EditFooter />} />
               
-              {/* एडमिन एरिया में गलत पाथ के लिए Admin 404 */}
               <Route path="*" element={<AdminNotFound />} />
             </Route>
           </Route>

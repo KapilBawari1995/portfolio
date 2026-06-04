@@ -8,7 +8,6 @@ export default function AboutManager() {
   const dispatch = useDispatch();
   const [showCV, setShowCV] = useState(false);
 
-  // Redux store से डेटा लेना
   const { data, loading, error } = useSelector((state) => state.adminProfile);
 
   useEffect(() => {

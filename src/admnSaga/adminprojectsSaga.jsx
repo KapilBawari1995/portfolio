@@ -1,6 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import axiosInstance from '../utils/axiosInstance';
-// Curly braces { } ke saath import karein
 import { showResponseToast } from '../utils/toastHandler';
 import { 
   adminFetchProjectsSuccess, 
@@ -9,7 +8,6 @@ import {
   adminOperationFailure 
 } from '../adminSlice/adminprojectsSlice';
 
-// 1. Fetch Projects
 function* fetchProjectsSaga() {
   try {
     const response = yield call(() => axiosInstance.get('/projects'));
@@ -20,7 +18,6 @@ function* fetchProjectsSaga() {
   }
 }
 
-// 2. Add Project
 function* addProjectSaga(action) {
   try {
     const response = yield call(() => axiosInstance.post('/projects', action.payload));
@@ -33,10 +30,8 @@ const status = e.response?.status || 500;
     yield put(adminOperationFailure(e.message));  }
 }
 
-// 3. Update Project
 function* updateProjectSaga(action) {
   try {
-    // Supabase REST API syntax: ?id=eq.YOUR_ID
     const response = yield call(() => 
       axiosInstance.patch(`/projects?id=eq.${action.payload.id}`, action.payload)
     );
@@ -49,7 +44,6 @@ function* updateProjectSaga(action) {
   }
 }
 
-// 4. Delete Project
 function* deleteProjectSaga(action) {
   try {
     const response = yield call(() => 
@@ -64,7 +58,6 @@ function* deleteProjectSaga(action) {
   }
 }
 
-// Watcher
 export default function* watchProjects() {
   yield all([
     takeLatest('adminprojects/adminFetchProjectsRequest', fetchProjectsSaga),

@@ -8,7 +8,6 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // Redux से करंट डेटा लेना
   const { data: reduxData, loading } = useSelector((state) => state.adminProfile);
   
   const [data, setData] = useState({
@@ -17,12 +16,10 @@ export default function EditProfile() {
   });
   const [uploading, setUploading] = useState(false);
 
-  // Redux डेटा लोड होते ही स्टेट सेट करना
   useEffect(() => {
     if (reduxData) setData(reduxData);
   }, [reduxData]);
 
-  // फाइल अपलोड फंक्शन
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -41,7 +38,6 @@ export default function EditProfile() {
   };
 
   const handleSave = () => {
-    // Redux-Saga को डेटा अपडेट करने के लिए भेजना
     dispatch(adminUpdateProfileRequest(data));
     navigate('/admin/about');
   };

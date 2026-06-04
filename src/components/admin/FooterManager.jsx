@@ -18,7 +18,6 @@ export default function FooterManager() {
 
   if (loading) return <div className="text-white p-8 text-center">Loading...</div>;
 
-  // यही डेटा जो व्यू पेज पर दिखेगा
   const fields = [
     { label: "Copyright Name", value: links?.copyright_name },
     { label: "GitHub URL", value: links?.github_url },
@@ -33,7 +32,7 @@ export default function FooterManager() {
         <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-white">← Back</button>
         <h2 className="text-3xl font-bold">Footer & Socials</h2>
         
-        {/* EDIT BUTTON (पेंसिल आइकॉन) */}
+  
         <button 
           onClick={() => navigate('/admin/edit-footer')} 
           className="text-[#c778dd] hover:text-white text-2xl p-2"

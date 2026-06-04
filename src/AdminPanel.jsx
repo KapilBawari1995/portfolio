@@ -12,7 +12,7 @@ export default function AdminPanel() {
 
   return (
     <div className="flex h-screen bg-[#1a1c22] text-white">
-      {/* Sidebar */}
+    
       <aside className="w-64 bg-[#282c33] p-6 border-r border-gray-700 flex flex-col">
         <h1 className="text-xl font-bold mb-8 text-[#c778dd]">ADMIN PANEL</h1>
         <nav className="flex flex-col gap-2 flex-grow">
@@ -29,7 +29,7 @@ export default function AdminPanel() {
           ))}
         </nav>
         
-        {/* Logout Button */}
+       
         <button onClick={handleLogout} className="text-red-400 hover:text-red-300 font-bold mt-auto text-left">
           Logout
         </button>
@@ -42,7 +42,7 @@ export default function AdminPanel() {
           <div className="flex items-center gap-3">
             <span className="text-sm">Admin</span>
             <img 
-              src="https://your-image-url.com/avatar.jpg" // यहाँ अपनी About वाली इमेज URL डालें
+              src="https://your-image-url.com/avatar.jpg" 
               alt="Admin Avatar"
               className="w-10 h-10 rounded-full border border-[#c778dd] object-cover"
             />
