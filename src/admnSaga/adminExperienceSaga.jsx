@@ -1,34 +1,28 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { supabase } from '../supabaseClient';
 import { 
-  adminFetchExperienceSuccess, 
-  adminUpdateExperienceSuccess, 
-  adminExperienceFailure 
+  adminFetchExperienceSuccess, adminAddExperienceSuccess,
+  adminUpdateExperienceSuccess, adminExperienceFailure 
 } from '../adminSlice/adminExperienceSlice';
 
-function* adminFetchExperienceSaga() {
+function* adminAddExperienceSaga(action) {
   try {
-    const { data, error } = yield call(() => 
-      supabase.from('experience').select('*').order('start_date', { ascending: false })
-    );
+    const { data, error } = yield call(() => supabase.from('experience').insert([action.payload]).select().single());
     if (error) throw error;
-    yield put(adminFetchExperienceSuccess(data || []));
+    yield put(adminAddExperienceSuccess(data));
   } catch (e) { yield put(adminExperienceFailure(e.message)); }
 }
 
 function* adminUpdateExperienceSaga(action) {
   try {
     const { id, payload } = action.payload;
-    const { data, error } = yield call(() => 
-      supabase.from('experience').update(payload).eq('id', id).select().single()
-    );
+    const { data, error } = yield call(() => supabase.from('experience').update(payload).eq('id', id).select().single());
     if (error) throw error;
     yield put(adminUpdateExperienceSuccess(data));
-    alert("Experience Updated Successfully!");
   } catch (e) { yield put(adminExperienceFailure(e.message)); }
 }
 
 export default function* watchAdminExperience() {
-  yield takeLatest('adminExperience/adminFetchExperienceRequest', adminFetchExperienceSaga);
+  yield takeLatest('adminExperience/adminAddExperienceRequest', adminAddExperienceSaga);
   yield takeLatest('adminExperience/adminUpdateExperienceRequest', adminUpdateExperienceSaga);
 }

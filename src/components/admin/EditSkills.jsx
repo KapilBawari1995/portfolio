@@ -1,63 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSkillsRequest } from '../../adminSlice/adminskillsSlice';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { adminUpdateSkillsRequest } from '../../adminSlice/adminSkillsSlice';
+
+// Validation Schema: Har field required hai
+const validationSchema = Yup.object({
+  languages: Yup.string().required('Languages are required'),
+  databases: Yup.string().required('Databases are required'),
+  tools: Yup.string().required('Tools are required'),
+  frameworks: Yup.string().required('Frameworks are required'),
+  other: Yup.string().required('Other skills are required'),
+});
 
 export default function EditSkills() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { data, loading } = useSelector((state) => state.adminSkills);
+
+  const formik = useFormik({
+    initialValues: {
+      languages: data?.languages || '',
+      databases: data?.databases || '',
+      tools: data?.tools || '',
+      frameworks: data?.frameworks || '',
+      other: data?.other || '',
+    },
+    enableReinitialize: true, // Jab Redux se data aaye, form update ho jaye
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log("DEBUG: Formik values:", values); 
   
- 
-  const { data, loading } = useSelector((state) => state.skills);
+  // Dispatch ko aise call karo
+  const action = adminUpdateSkillsRequest(values);
+  console.log("DEBUG: Action Object:", action); 
   
-  const [skills, setSkills] = useState({ 
-    languages: '', databases: '', tools: '', frameworks: '', other: '' 
+  dispatch(action);
+      // dispatch(adminUpdateSkillsRequest(values));
+      // navigate('/admin/skills');
+    },
   });
 
-  useEffect(() => {
-    if (data) setSkills(data);
-  }, [data]);
-
- 
-  const [isSaving, setIsSaving] = useState(false);
-  useEffect(() => {
-    if (isSaving && !loading) {
-      navigate('/admin/skills');
-    }
-  }, [loading, isSaving, navigate]);
-
-  const handleSave = () => {
-    setIsSaving(true);
-    dispatch(updateSkillsRequest(skills));
-  };
-
   return (
-    <div className="bg-[#282c33] p-8 rounded-lg border border-gray-700 text-white max-w-3xl mx-auto space-y-6">
-      <h2 className="text-3xl font-bold border-b border-gray-600 pb-4">Edit Skills</h2>
+    <div className="bg-[#282c33] p-8 text-white max-w-3xl mx-auto">
+      <h2 className="text-3xl font-bold mb-6">Edit Skills</h2>
       
-      <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-white mb-4">← Back</button>
-
-      <div className="space-y-4">
-        {Object.keys(skills).map((key) => (
-          <div key={key} className="bg-gray-800 p-4 rounded-md border border-gray-700">
-            <label className="text-[#c778dd] text-sm font-bold block mb-2 capitalize">{key}</label>
-            <input 
-              className="w-full bg-gray-900 p-3 rounded text-white border border-gray-600 outline-none"
-              value={skills[key] || ''} 
-              onChange={(e) => setSkills({...skills, [key]: e.target.value})} 
-              placeholder={`Enter ${key} separated by comma`}
+      <form onSubmit={formik.handleSubmit}>
+        {Object.keys(formik.initialValues).map((key) => (
+          <div key={key} className="mb-4">
+            <label className="block text-[#c778dd] capitalize mb-1">{key}</label>
+            <input
+              name={key}
+              className={`w-full bg-gray-900 p-3 rounded border outline-none ${
+                formik.touched[key] && formik.errors[key] ? 'border-red-500' : 'border-gray-600'
+              }`}
+              value={formik.values[key]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched[key] && formik.errors[key] ? (
+              <div className="text-red-500 text-sm mt-1">{formik.errors[key]}</div>
+            ) : null}
           </div>
         ))}
-      </div>
-
-      <button 
-        onClick={handleSave} 
-        disabled={loading}
-        className="w-full bg-[#c778dd] text-black font-bold py-4 rounded hover:bg-white transition-all disabled:opacity-50"
-      >
-        {loading ? 'SAVING...' : 'SAVE ALL SKILLS'}
-      </button>
+        
+        <button 
+          type="submit" 
+          disabled={loading} 
+          className="w-full bg-[#c778dd] p-3 rounded font-bold mt-4"
+        >
+          {loading ? 'SAVING...' : 'SAVE & GO BACK'}
+        </button>
+      </form>
     </div>
   );
 }

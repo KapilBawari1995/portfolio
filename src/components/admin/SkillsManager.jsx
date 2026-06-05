@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSkillsRequest } from '../../adminSlice/adminskillsSlice';
+import { adminFetchSkillsRequest } from '../../adminSlice/adminskillsSlice';
 
 export default function SkillsManager() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.skills);
+  const { data, loading, error } = useSelector((state) => state.adminSkills);
 
   useEffect(() => {
-    dispatch(fetchSkillsRequest());
+    dispatch(adminFetchSkillsRequest());
   }, [dispatch]);
 
   if (loading) return <div className="text-white p-8 text-center">Loading...</div>;

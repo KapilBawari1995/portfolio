@@ -51,6 +51,12 @@ import adminBlogsSaga from '../admnSaga/adminBlogSaga';
 import adminExperienceReducer from '../adminSlice/adminExperienceSlice';
 import adminExperienceSaga  from '../admnSaga/adminExperienceSaga';
 
+
+import adminSkillsReducer from '../adminSlice/adminskillsSlice';
+import adminadminSkillsSaga from '../admnSaga/adminskillsSaga';
+
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
@@ -69,6 +75,7 @@ export const store = configureStore({
     adminprojects: adminprojectsReducer,
     adminProfile: adminProfileReducer,
     adminBlogs: adminBlogsReducer,
+    adminSkills: adminSkillsReducer,
 
     adminExperience: adminExperienceReducer,
 
@@ -93,6 +100,9 @@ sagaMiddleware.run(adminprojectsSaga);
 sagaMiddleware.run(adminProfileSaga);
 sagaMiddleware.run(adminBlogsSaga);
 sagaMiddleware.run(adminExperienceSaga);
+
+
+sagaMiddleware.run(adminadminSkillsSaga);
 
 
 
